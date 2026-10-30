@@ -1,0 +1,18 @@
+{
+  "drawing_number": "HC-063-0300",
+  "name": "油圧シリンダー",
+  "material": "STKM13C",
+  "author": "",
+  "params": {
+    "bore": 63.0,
+    "rod_dia": 36.0,
+    "stroke": 300.0,
+    "tube_thickness": 6.0,
+    "cover_size": 90.0,
+    "head_cover_len": 45.0,
+    "rod_cover_len": 50.0,
+    "piston_width": 30.0,
+    "rod_extension": 40.0
+  },
+  "updated": "2026-10-23T12:49:23"
+}

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>油圧シリンダー設計</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header>
+  <h1>油圧シリンダー設計</h1>
+  {% if freecad %}
+    <span class="badge ok">FreeCAD {{ freecad }} 接続中</span>
+  {% else %}
+    <span class="badge ng" title="FreeCAD の Python コンソールで hd_rpc_server.py を実行してください">FreeCAD 未接続</span>
+  {% endif %}
+</header>
+
+<main>
+  <aside>
+    <a class="new" href="{{ url_for('index') }}">＋ 新規</a>
+    <h2>保存済み</h2>
+    <ul>
+      {% for s in saved %}
+        <li class="{{ 'current' if s.drawing_number == spec.drawing_number }}">
+          <a href="{{ url_for('index', dn=s.drawing_number) }}">
+            <strong>{{ s.drawing_number }}</strong>
+            <span>{{ s.name }}　φ{{ '%g' % s.params.bore }}×{{ '%g' % s.params.stroke }}st</span>
+          </a>
+        </li>
+      {% else %}
+        <li class="empty">まだありません</li>
+      {% endfor %}
+    </ul>
+  </aside>
+
+  <section>
+    {% for category, message in get_flashed_messages(with_categories=true) %}
+      <p class="flash {{ category }}">{{ message }}</p>
+    {% endfor %}
+
+    <form method="post">
+      <fieldset>
+        <legend>図面情報</legend>
+        {% for key, label in info_fields %}
+          <label>{{ label }}
+            <input name="{{ key }}" value="{{ spec[key] }}" {% if key == 'drawing_number' %}required placeholder="例: HC-063-0300"{% endif %}>
+          </label>
+        {% endfor %}
+      </fieldset>
+
+      <fieldset>
+        <legend>寸法 [mm]</legend>
+        {% for key, label, default in cylinder_fields %}
+          <label>{{ label }}
+            <input name="{{ key }}" type="number" step="any" min="0" value="{{ '%g' % spec.params[key]|float }}" required>
+          </label>
+        {% endfor %}
+        {% if overall %}<p class="note">全長（縮み切り時）：{{ '%g' % overall }} mm</p>{% endif %}
+      </fieldset>
+
+      <div class="actions">
+        <button name="action" value="save" class="secondary">保存</button>
+        <button name="action" value="build">3D モデル更新</button>
+        <button name="action" value="drawing">図面出力（部品図 DXF ＋ 組立図 DXF / PDF）</button>
+      </div>
+    </form>
+
+    {% if files %}
+      <h2>出力ファイル</h2>
+      <ul class="files">
+        {% for f in files %}
+          <li><a href="{{ url_for('output_file', drawing_number=spec.drawing_number, filename=f) }}">{{ f }}</a></li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </section>
+</main>
+</body>
+</html>

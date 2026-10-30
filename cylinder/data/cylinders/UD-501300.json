@@ -1,0 +1,24 @@
+{
+  "drawing_number": "UD-501300",
+  "name": "油圧シリンダー",
+  "material": "STKM13C",
+  "author": "UEDA",
+  "params": {
+    "bore": 80.0,
+    "rod_dia": 50.0,
+    "stroke": 1300.0,
+    "tube_thickness": 6.0,
+    "cover_size": 120.0,
+    "head_cover_len": 50.0,
+    "rod_cover_len": 50.0,
+    "piston_width": 30.0,
+    "rod_extension": 50.0,
+    "spigot_depth": 5.0,
+    "tie_rod_dia": 12.0,
+    "tie_rod_pitch": 100.0,
+    "port_dia": 21.0,
+    "rod_end_dia": 20.0,
+    "rod_end_len": 40.0
+  },
+  "updated": "2026-10-30T16:06:11"
+}

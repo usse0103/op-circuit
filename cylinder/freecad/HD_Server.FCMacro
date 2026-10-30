@@ -1,0 +1,4 @@
+# hydraulic-designer の受付サーバーを起動する（もう一度実行すると立て直す）
+# FreeCAD のマクロフォルダに置き、マクロ → マクロ... から実行する
+path = r"C:\Users\yukit\projects\hydraulics\cylinder\freecad\hd_rpc_server.py"
+exec(open(path, encoding="utf-8").read(), {"__file__": path, "__name__": "hd_rpc_server"})
