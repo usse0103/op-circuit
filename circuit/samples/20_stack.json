@@ -1,0 +1,71 @@
+{
+ "format": "hc-circuit/1",
+ "meta": {
+  "title": "クランプ・送り回路（積層弁）",
+  "drawingNo": "",
+  "project": "見本",
+  "date": "",
+  "sheet": "A3",
+  "scale": "NTS",
+  "showBom": true,
+  "notes": "MV1 はクランプ用。減圧弁でクランプ力を制限し、パイロット操作逆止め弁で保持する。\nMV2 は送り用。メータアウトの一方向絞り弁はパイロット操作逆止め弁よりベース側に置く。"
+ },
+ "settings": {"fluid": "VG46", "oilTemp": 50, "ambTemp": 30, "maxTemp": 55, "tankVolume": 100, "tankArea": 0, "tankK": 12, "crossStyle": "jump"},
+ "components": [
+  {"id": "pump", "type": "pump_var", "x": 60, "y": 215, "tag": "P1", "params": {"disp": 16, "speed": 1800, "p_comp": 7, "band": 0.7}},
+  {"id": "str", "type": "filter", "x": 60, "y": 237.5, "tag": "F1", "params": {"use": "suction", "dp_rated": 0.005, "bypass": 0}},
+  {"id": "tk1", "type": "tank", "x": 60, "y": 250},
+  {"id": "jr", "type": "junction", "x": 60, "y": 170},
+  {"id": "rv", "type": "relief", "x": 85, "y": 185, "tag": "RV1", "params": {"p_set": 8.5}},
+  {"id": "tk2", "type": "tank", "x": 85, "y": 200},
+  {"id": "jg", "type": "junction", "x": 60, "y": 160},
+  {"id": "pg", "type": "gauge", "x": 60, "y": 152.5, "tag": "PG1", "params": {"range": "16"}},
+  {"id": "jp", "type": "junction", "x": 127.5, "y": 160},
+  {"id": "mv1", "type": "stack", "x": 150, "y": 130, "tag": "MV1", "params": {"size": "01", "center": "closed", "layers": [
+    {"kind": "reducing", "line": "P", "p_set": 3.5},
+    {"kind": "pcheck", "line": "AB", "ratio": 3.0}
+  ]}},
+  {"id": "mv2", "type": "stack", "x": 270, "y": 130, "tag": "MV2", "params": {"size": "01", "center": "closed", "layers": [
+    {"kind": "pcheck", "line": "AB", "ratio": 3.0},
+    {"kind": "tcheck", "line": "AB", "mode": "out", "d": 1.2}
+  ]}},
+  {"id": "cyl1", "type": "cyl_double", "x": 205, "y": 35, "tag": "CYL1", "params": {"bore": 50, "rod": 28, "stroke": 100, "f_ext": 4, "f_ret": 0.5}},
+  {"id": "cyl2", "type": "cyl_double", "x": 325, "y": 35, "tag": "CYL2", "params": {"bore": 63, "rod": 35.5, "stroke": 400, "f_ext": 8, "f_ret": 1}},
+  {"id": "jt", "type": "junction", "x": 262.5, "y": 150},
+  {"id": "he", "type": "cooler", "x": 355, "y": 150, "rot": 270, "tag": "HE1", "params": {"capacity": 1.0}},
+  {"id": "rf", "type": "filter", "x": 380, "y": 150, "rot": 270, "tag": "F2", "params": {"use": "return", "dp_rated": 0.05, "bypass": 0.15}},
+  {"id": "tk3", "type": "tank", "x": 397.5, "y": 160}
+ ],
+ "wires": [
+  {"id": "w1", "a": {"c": "tk1", "p": "T"}, "b": {"c": "str", "p": "OUT"}},
+  {"id": "w2", "a": {"c": "str", "p": "IN"}, "b": {"c": "pump", "p": "S"}},
+  {"id": "w3", "a": {"c": "pump", "p": "P"}, "b": {"c": "jr", "p": "J"}},
+  {"id": "w4", "a": {"c": "jr", "p": "J"}, "b": {"c": "rv", "p": "P"}},
+  {"id": "w5", "a": {"c": "rv", "p": "T"}, "b": {"c": "tk2", "p": "T"}},
+  {"id": "w6", "a": {"c": "jr", "p": "J"}, "b": {"c": "jg", "p": "J"}},
+  {"id": "w7", "a": {"c": "jg", "p": "J"}, "b": {"c": "pg", "p": "P"}},
+  {"id": "w8", "a": {"c": "jg", "p": "J"}, "b": {"c": "jp", "p": "J"}},
+  {"id": "w9", "a": {"c": "jp", "p": "J"}, "b": {"c": "mv1", "p": "P"}},
+  {"id": "w10", "a": {"c": "jp", "p": "J"}, "b": {"c": "mv2", "p": "P"}},
+  {"id": "w11", "a": {"c": "mv1", "p": "T"}, "b": {"c": "jt", "p": "J"}},
+  {"id": "w12", "a": {"c": "mv2", "p": "T"}, "b": {"c": "jt", "p": "J"}},
+  {"id": "w13", "a": {"c": "jt", "p": "J"}, "b": {"c": "he", "p": "IN"}},
+  {"id": "w14", "a": {"c": "he", "p": "OUT"}, "b": {"c": "rf", "p": "IN"}},
+  {"id": "w15", "a": {"c": "rf", "p": "OUT"}, "b": {"c": "tk3", "p": "T"}},
+  {"id": "w16", "a": {"c": "mv1", "p": "A"}, "b": {"c": "cyl1", "p": "H"}},
+  {"id": "w17", "a": {"c": "mv1", "p": "B"}, "b": {"c": "cyl1", "p": "R"}},
+  {"id": "w18", "a": {"c": "mv2", "p": "A"}, "b": {"c": "cyl2", "p": "H"}},
+  {"id": "w19", "a": {"c": "mv2", "p": "B"}, "b": {"c": "cyl2", "p": "R"}}
+ ],
+ "frames": [
+  {"id": "f1", "x": 30, "y": 137.5, "w": 80, "h": 127.5, "label": "油圧ユニット"}
+ ],
+ "texts": [],
+ "steps": [
+  {"id": "s1", "name": "クランプ", "duration": 0, "states": {"mv1": "a"}},
+  {"id": "s2", "name": "送り前進", "duration": 0, "states": {"mv2": "a"}},
+  {"id": "s3", "name": "送り後退", "duration": 0, "states": {"mv2": "b"}},
+  {"id": "s4", "name": "アンクランプ", "duration": 0, "states": {"mv1": "b"}},
+  {"id": "s5", "name": "待機", "duration": 10, "states": {}}
+ ]
+}

@@ -1,0 +1,53 @@
+{
+  "category": {"id": "modular", "name": "積層弁（モジュラー弁）", "order": 70},
+  "components": [
+    {
+      "type": "stack", "name": "積層弁スタック", "en": "Modular valve stack",
+      "jis": "JIS B 0125 表 12～15 の記号を P・T・B・A の 4 本線に配置（各社モジュラー弁カタログの表記）",
+      "tag": "MV", "model": "stack", "symbol": "stack",
+      "ports": ["P", "T", "B", "A"],
+      "spec": "呼び {size} / {center}",
+      "states": {"default": "n", "options": [
+        {"value": "a", "label": "a", "title": "SOL a 励磁（P→A, B→T）"},
+        {"value": "n", "label": "中立", "title": "中立"},
+        {"value": "b", "label": "b", "title": "SOL b 励磁（P→B, A→T）"}]},
+      "params": [
+        {"key": "size", "label": "呼び径（取付面）", "type": "select", "default": "01",
+         "options": [
+           {"value": "01", "label": "01（ISO 4401-03）", "set": {"q_rated": 30, "dp_rated": 0.4}},
+           {"value": "03", "label": "03（ISO 4401-05）", "set": {"q_rated": 80, "dp_rated": 0.4}}]},
+        {"key": "center", "label": "電磁弁の中立位置", "type": "select", "default": "closed", "symbol": true,
+         "options": [
+           {"value": "closed", "label": "2: クローズドセンタ"},
+           {"value": "open", "label": "3: オープンセンタ"},
+           {"value": "float", "label": "4: ABT 接続"},
+           {"value": "tandem", "label": "60: PT 接続"},
+           {"value": "pab", "label": "9: PAB 接続"}]},
+        {"key": "layers", "label": "積層する弁", "type": "layers", "symbol": true,
+         "default": [
+           {"kind": "pcheck", "line": "AB", "crack": 0.2, "ratio": 3.0},
+           {"kind": "tcheck", "line": "AB", "mode": "out", "d": 1.5}
+         ]},
+        {"key": "q_rated", "label": "基準流量", "unit": "L/min", "min": 1, "max": 600, "step": 1, "default": 30, "group": "圧力損失"},
+        {"key": "dp_rated", "label": "電磁弁の圧力損失（1 流路）", "unit": "MPa", "min": 0.02, "max": 3, "step": 0.01, "default": 0.4, "group": "圧力損失"}
+      ],
+      "layerKinds": [
+        {"kind": "relief", "name": "リリーフ弁", "lines": ["P", "A", "B", "AB"],
+         "fields": [{"key": "p_set", "label": "設定圧力", "unit": "MPa", "min": 0.5, "max": 35, "step": 0.1, "default": 7.0}]},
+        {"kind": "reducing", "name": "減圧弁", "lines": ["P", "A", "B"], "lineLabel": "パイロット",
+         "fields": [{"key": "p_set", "label": "設定圧力", "unit": "MPa", "min": 0.3, "max": 35, "step": 0.1, "default": 3.5}]},
+        {"kind": "check", "name": "逆止め弁", "lines": ["P", "T"],
+         "fields": [{"key": "crack", "label": "クラッキング圧力", "unit": "MPa", "min": 0, "max": 1, "step": 0.01, "default": 0.04}]},
+        {"kind": "throttle", "name": "絞り弁", "lines": ["P", "T"],
+         "fields": [{"key": "d", "label": "絞りの相当径", "unit": "mm", "min": 0, "max": 10, "step": 0.05, "default": 2.0}]},
+        {"kind": "tcheck", "name": "一方向絞り弁", "lines": ["A", "B", "AB"], "modes": [
+           {"value": "out", "label": "メータアウト"}, {"value": "in", "label": "メータイン"}],
+         "fields": [{"key": "d", "label": "絞りの相当径", "unit": "mm", "min": 0, "max": 10, "step": 0.05, "default": 1.5}]},
+        {"kind": "pcheck", "name": "パイロット操作逆止め弁", "lines": ["A", "B", "AB"],
+         "fields": [{"key": "ratio", "label": "パイロット面積比", "unit": "", "min": 1, "max": 20, "step": 0.1, "default": 3.0}]},
+        {"kind": "cbal", "name": "カウンタバランス弁", "lines": ["A", "B"],
+         "fields": [{"key": "p_set", "label": "設定圧力", "unit": "MPa", "min": 0.3, "max": 35, "step": 0.1, "default": 5.0}]}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+ "format": "hc-circuit/1",
+ "meta": {
+  "title": "シリンダ前後進回路（メータアウト）",
+  "drawingNo": "",
+  "project": "見本",
+  "date": "",
+  "sheet": "A3",
+  "scale": "NTS",
+  "showBom": true,
+  "notes": "リリーフ弁の設定圧力は 7 MPa とする。\n前進速度は一方向絞り弁（TCV1）で調整する。"
+ },
+ "settings": {"fluid": "VG46", "oilTemp": 50, "ambTemp": 30, "maxTemp": 55, "tankVolume": 60, "tankArea": 0, "tankK": 12, "crossStyle": "jump"},
+ "components": [
+  {"id": "cyl", "type": "cyl_double", "x": 210, "y": 55, "tag": "CYL1", "params": {"bore": 63, "rod": 35.5, "stroke": 300, "f_ext": 12, "f_ret": 2}},
+  {"id": "tcv", "type": "throttle_check", "x": 222.5, "y": 85, "rot": 180, "tag": "TCV1", "params": {"d": 1.6}},
+  {"id": "sv", "type": "dcv43", "x": 210, "y": 120, "tag": "SV1", "params": {"center": "tandem", "size": "01"}},
+  {"id": "pump", "type": "pump_fixed", "x": 120, "y": 215, "tag": "P1", "params": {"disp": 8, "speed": 1800}},
+  {"id": "str", "type": "filter", "x": 120, "y": 240, "tag": "F1", "params": {"use": "suction", "dp_rated": 0.005, "bypass": 0}},
+  {"id": "tk1", "type": "tank", "x": 120, "y": 252.5},
+  {"id": "j1", "type": "junction", "x": 120, "y": 180},
+  {"id": "j2", "type": "junction", "x": 147.5, "y": 180},
+  {"id": "j3", "type": "junction", "x": 175, "y": 180},
+  {"id": "pg", "type": "gauge", "x": 147.5, "y": 172.5, "tag": "PG1", "params": {"range": "16"}},
+  {"id": "rv", "type": "relief", "x": 175, "y": 200, "tag": "RV1", "params": {"p_set": 7}},
+  {"id": "tk2", "type": "tank", "x": 175, "y": 215},
+  {"id": "rf", "type": "filter", "x": 212.5, "y": 200, "tag": "F2", "params": {"use": "return", "dp_rated": 0.05, "bypass": 0.15}},
+  {"id": "tk3", "type": "tank", "x": 212.5, "y": 215}
+ ],
+ "wires": [
+  {"id": "w1", "a": {"c": "tk1", "p": "T"}, "b": {"c": "str", "p": "OUT"}},
+  {"id": "w2", "a": {"c": "str", "p": "IN"}, "b": {"c": "pump", "p": "S"}},
+  {"id": "w3", "a": {"c": "pump", "p": "P"}, "b": {"c": "j1", "p": "J"}},
+  {"id": "w4", "a": {"c": "j1", "p": "J"}, "b": {"c": "j2", "p": "J"}},
+  {"id": "w5", "a": {"c": "j2", "p": "J"}, "b": {"c": "pg", "p": "P"}},
+  {"id": "w6", "a": {"c": "j2", "p": "J"}, "b": {"c": "j3", "p": "J"}},
+  {"id": "w7", "a": {"c": "j3", "p": "J"}, "b": {"c": "rv", "p": "P"}},
+  {"id": "w8", "a": {"c": "rv", "p": "T"}, "b": {"c": "tk2", "p": "T"}},
+  {"id": "w9", "a": {"c": "j3", "p": "J"}, "b": {"c": "sv", "p": "P"}},
+  {"id": "w10", "a": {"c": "sv", "p": "T"}, "b": {"c": "rf", "p": "IN"}},
+  {"id": "w11", "a": {"c": "rf", "p": "OUT"}, "b": {"c": "tk3", "p": "T"}},
+  {"id": "w12", "a": {"c": "sv", "p": "A"}, "b": {"c": "cyl", "p": "H"}},
+  {"id": "w13", "a": {"c": "sv", "p": "B"}, "b": {"c": "tcv", "p": "OUT"}},
+  {"id": "w14", "a": {"c": "tcv", "p": "IN"}, "b": {"c": "cyl", "p": "R"}}
+ ],
+ "frames": [
+  {"id": "f1", "x": 95, "y": 160, "w": 130, "h": 105, "label": "油圧ユニット"}
+ ],
+ "texts": [],
+ "steps": [
+  {"id": "s1", "name": "前進", "duration": 0, "states": {"sv": "a"}},
+  {"id": "s2", "name": "加圧保持", "duration": 5, "states": {"sv": "a", "cyl": "stall"}},
+  {"id": "s3", "name": "後退", "duration": 0, "states": {"sv": "b"}},
+  {"id": "s4", "name": "待機", "duration": 10, "states": {}}
+ ]
+}

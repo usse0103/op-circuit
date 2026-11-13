@@ -1,0 +1,63 @@
+{
+  "category": {"id": "pressure", "name": "圧力制御弁", "order": 30},
+  "components": [
+    {
+      "type": "relief", "name": "リリーフ弁", "en": "Relief valve",
+      "jis": "JIS B 0125 表 14 圧力制御弁 14-1", "tag": "RV", "model": "relief", "symbol": "relief",
+      "ports": ["P", "T"],
+      "spec": "設定 {p_set} MPa",
+      "params": [
+        {"key": "p_set", "label": "設定圧力", "unit": "MPa", "min": 0.5, "max": 35, "step": 0.1, "default": 7.0},
+        {"key": "override", "label": "圧力オーバーライド", "unit": "%", "min": 2, "max": 40, "step": 1, "default": 10,
+         "help": "クラッキング圧力 = 設定圧力 ×（1 − この値）。パイロット作動形で 5～10 %、直動形で 15～25 % が目安"},
+        {"key": "q_adj", "label": "調整時流量", "unit": "L/min", "min": 0, "max": 600, "step": 1, "default": 0,
+         "help": "この流量が流れたときに設定圧力になる。0 のときは回路のポンプ吐出量の合計を使う"}
+      ]
+    },
+    {
+      "type": "reducing", "name": "減圧弁", "en": "Pressure reducing valve",
+      "jis": "JIS B 0125 表 14 圧力制御弁 14-5", "tag": "PRV", "model": "reducing", "symbol": "reducing",
+      "ports": ["P", "A"],
+      "spec": "設定 {p_set} MPa",
+      "params": [
+        {"key": "p_set", "label": "設定圧力（二次側）", "unit": "MPa", "min": 0.3, "max": 35, "step": 0.1, "default": 3.5},
+        {"key": "q_rated", "label": "基準流量", "unit": "L/min", "min": 1, "max": 600, "step": 1, "default": 40, "group": "圧力損失"},
+        {"key": "dp_rated", "label": "全開時の圧力損失", "unit": "MPa", "min": 0.02, "max": 3, "step": 0.01, "default": 0.5, "group": "圧力損失"}
+      ]
+    },
+    {
+      "type": "sequence", "name": "シーケンス弁", "en": "Sequence valve",
+      "jis": "JIS B 0125 表 14 圧力制御弁 14-10", "tag": "SQV", "model": "sequence", "symbol": "sequence",
+      "ports": ["P", "A"],
+      "spec": "設定 {p_set} MPa",
+      "params": [
+        {"key": "p_set", "label": "設定圧力", "unit": "MPa", "min": 0.3, "max": 35, "step": 0.1, "default": 5.0,
+         "help": "一次側（内部パイロット）がこの圧力を超えると二次側に流す"},
+        {"key": "q_rated", "label": "基準流量", "unit": "L/min", "min": 1, "max": 600, "step": 1, "default": 40, "group": "圧力損失"},
+        {"key": "dp_rated", "label": "全開時の圧力損失", "unit": "MPa", "min": 0.02, "max": 3, "step": 0.01, "default": 0.5, "group": "圧力損失"}
+      ]
+    },
+    {
+      "type": "counterbalance", "name": "カウンタバランス弁", "en": "Counterbalance valve",
+      "jis": "JIS B 0125 表 14 圧力制御弁 14-14", "tag": "CBV", "model": "counterbalance", "symbol": "counterbalance",
+      "ports": ["C", "V"],
+      "spec": "設定 {p_set} MPa",
+      "params": [
+        {"key": "p_set", "label": "設定圧力", "unit": "MPa", "min": 0.3, "max": 35, "step": 0.1, "default": 5.0,
+         "help": "負荷側（C）の圧力がこの値を超えると弁側（V）へ流す。自重による負荷圧力の 1.3 倍程度が目安"},
+        {"key": "crack", "label": "逆止め弁のクラッキング圧力", "unit": "MPa", "min": 0, "max": 1, "step": 0.01, "default": 0.04},
+        {"key": "q_rated", "label": "基準流量", "unit": "L/min", "min": 1, "max": 600, "step": 1, "default": 40, "group": "圧力損失"},
+        {"key": "dp_rated", "label": "全開時の圧力損失", "unit": "MPa", "min": 0.02, "max": 3, "step": 0.01, "default": 0.5, "group": "圧力損失"}
+      ]
+    },
+    {
+      "type": "pressure_switch", "name": "圧力スイッチ", "en": "Pressure switch",
+      "jis": "JIS B 0125 表 19 その他の機器", "tag": "PS", "model": "pressure_switch", "symbol": "pressure_switch",
+      "ports": ["P"],
+      "spec": "設定 {p_set} MPa",
+      "params": [
+        {"key": "p_set", "label": "設定圧力", "unit": "MPa", "min": 0.1, "max": 35, "step": 0.1, "default": 5.0}
+      ]
+    }
+  ]
+}

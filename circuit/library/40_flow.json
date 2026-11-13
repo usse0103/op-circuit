@@ -1,0 +1,45 @@
+{
+  "category": {"id": "flow", "name": "流量制御弁", "order": 40},
+  "components": [
+    {
+      "type": "throttle", "name": "絞り弁", "en": "Throttle valve",
+      "jis": "JIS B 0125 表 15 流量制御弁 15-1.1", "tag": "TV", "model": "throttle", "symbol": "throttle",
+      "ports": ["IN", "OUT"],
+      "spec": "絞り径 {d} mm",
+      "params": [
+        {"key": "d", "label": "絞りの相当径", "unit": "mm", "min": 0, "max": 12, "step": 0.05, "default": 2.0,
+         "help": "開度を、同じ流量を流す円形オリフィスの直径で表す。Q = 60·k·A·√(2ΔP/ρ)"},
+        {"key": "cd", "label": "流量係数 k", "unit": "", "min": 0.5, "max": 0.8, "step": 0.01, "default": 0.65, "group": "計算"}
+      ]
+    },
+    {
+      "type": "throttle_check", "name": "一方向絞り弁", "en": "One-way throttle valve",
+      "jis": "JIS B 0125 表 15 流量制御弁 15-1.4", "tag": "TCV", "model": "throttle_check", "symbol": "throttle_check",
+      "ports": ["IN", "OUT"],
+      "spec": "絞り径 {d} mm",
+      "params": [
+        {"key": "d", "label": "絞りの相当径", "unit": "mm", "min": 0, "max": 12, "step": 0.05, "default": 2.0,
+         "help": "IN → OUT が制御流れ、OUT → IN が自由流れ"},
+        {"key": "cd", "label": "流量係数 k", "unit": "", "min": 0.5, "max": 0.8, "step": 0.01, "default": 0.65, "group": "計算"},
+        {"key": "crack", "label": "逆止め弁のクラッキング圧力", "unit": "MPa", "min": 0, "max": 1, "step": 0.01, "default": 0.04, "group": "計算"},
+        {"key": "q_rated", "label": "自由流れの基準流量", "unit": "L/min", "min": 1, "max": 600, "step": 1, "default": 40, "group": "圧力損失"},
+        {"key": "dp_rated", "label": "自由流れの圧力損失", "unit": "MPa", "min": 0.02, "max": 3, "step": 0.01, "default": 0.3, "group": "圧力損失"}
+      ]
+    },
+    {
+      "type": "flow_control", "name": "流量調整弁（圧力補償付き）", "en": "Flow control valve, pressure compensated",
+      "jis": "JIS B 0125 表 15 流量制御弁 15-2.1 / 15-2.4", "tag": "FCV", "model": "flow_control", "symbol": "flow_control",
+      "ports": ["IN", "OUT"],
+      "spec": "設定 {q_set} L/min",
+      "params": [
+        {"key": "q_set", "label": "設定流量", "unit": "L/min", "min": 0, "max": 200, "step": 0.1, "default": 10.0},
+        {"key": "dp_min", "label": "最小作動差圧", "unit": "MPa", "min": 0.3, "max": 2, "step": 0.05, "default": 1.0,
+         "help": "これより差圧が小さいと圧力補償が効かず、設定流量に届かない"},
+        {"key": "with_check", "label": "逆止め弁付き", "type": "bool", "default": true, "symbol": true},
+        {"key": "crack", "label": "逆止め弁のクラッキング圧力", "unit": "MPa", "min": 0, "max": 1, "step": 0.01, "default": 0.04, "group": "計算"},
+        {"key": "q_rated", "label": "自由流れの基準流量", "unit": "L/min", "min": 1, "max": 600, "step": 1, "default": 40, "group": "圧力損失"},
+        {"key": "dp_rated", "label": "自由流れの圧力損失", "unit": "MPa", "min": 0.02, "max": 3, "step": 0.01, "default": 0.3, "group": "圧力損失"}
+      ]
+    }
+  ]
+}

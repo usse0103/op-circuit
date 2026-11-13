@@ -1,0 +1,135 @@
+{
+ "meta": {
+  "title": "油圧回路図",
+  "drawingNo": "",
+  "project": "",
+  "customer": "",
+  "author": "",
+  "checker": "",
+  "approver": "",
+  "date": "2026-11-13",
+  "rev": "",
+  "sheet": "A3",
+  "scale": "NTS",
+  "notes": "",
+  "showBom": true
+ },
+ "steps": [
+  {
+   "id": "smwenkme31",
+   "name": "中立",
+   "duration": 0,
+   "states": {}
+  }
+ ],
+ "format": "hc-circuit/1",
+ "settings": {
+  "ambTemp": 30,
+  "fluid": "VG46",
+  "maxTemp": 55,
+  "oilTemp": 50,
+  "tankArea": 0,
+  "tankK": 12,
+  "tankVolume": 100,
+  "crossStyle": "jump"
+ },
+ "components": [
+  {
+   "id": "cmwenkpos2c",
+   "type": "tank",
+   "x": 82.5,
+   "y": 262.5,
+   "rot": 0,
+   "flip": false,
+   "tag": "",
+   "params": {}
+  },
+  {
+   "id": "cmwenkwuh5d",
+   "type": "pump_fixed",
+   "x": 85,
+   "y": 217.5,
+   "rot": 0,
+   "flip": false,
+   "tag": "P1",
+   "params": {}
+  },
+  {
+   "id": "cmwenlk1a83",
+   "type": "filter",
+   "x": 75,
+   "y": 242.5,
+   "rot": 0,
+   "flip": false,
+   "tag": "F1",
+   "params": {}
+  },
+  {
+   "id": "cmwenme2sac",
+   "type": "cyl_double",
+   "x": 147.5,
+   "y": 170,
+   "rot": 0,
+   "flip": false,
+   "tag": "CYL1",
+   "params": {}
+  },
+  {
+   "id": "cmwenmie0dh",
+   "type": "throttle_check",
+   "x": 162.5,
+   "y": 202.5,
+   "rot": 0,
+   "flip": false,
+   "tag": "TCV1",
+   "params": {}
+  }
+ ],
+ "wires": [
+  {
+   "id": "wmwenm0x886",
+   "a": {
+    "c": "cmwenkwuh5d",
+    "p": "S"
+   },
+   "b": {
+    "c": "cmwenlk1a83",
+    "p": "IN"
+   },
+   "kind": "main",
+   "pts": null,
+   "pipe": {}
+  },
+  {
+   "id": "wmwenm5ei87",
+   "a": {
+    "c": "cmwenlk1a83",
+    "p": "OUT"
+   },
+   "b": {
+    "c": "cmwenkpos2c",
+    "p": "T"
+   },
+   "kind": "main",
+   "pts": null,
+   "pipe": {}
+  },
+  {
+   "id": "wmwenmkrddi",
+   "a": {
+    "c": "cmwenme2sac",
+    "p": "R"
+   },
+   "b": {
+    "c": "cmwenmie0dh",
+    "p": "OUT"
+   },
+   "kind": "main",
+   "pts": null,
+   "pipe": {}
+  }
+ ],
+ "frames": [],
+ "texts": [],
+ "id": "c20261113-162604"
+}

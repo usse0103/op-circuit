@@ -1,0 +1,269 @@
+{
+ "meta": {
+  "title": "油圧回路図",
+  "drawingNo": "",
+  "project": "",
+  "customer": "",
+  "author": "",
+  "checker": "",
+  "approver": "",
+  "date": "2026-11-13",
+  "rev": "",
+  "sheet": "A3",
+  "scale": "NTS",
+  "notes": "",
+  "showBom": true
+ },
+ "steps": [
+  {
+   "id": "smweo321b1",
+   "name": "中立",
+   "duration": 0,
+   "states": {}
+  },
+  {
+   "id": "smweo9pbe1d",
+   "name": "工程 2",
+   "duration": 0,
+   "states": {
+    "cmweo4vjm9": "a"
+   }
+  }
+ ],
+ "format": "hc-circuit/1",
+ "settings": {
+  "ambTemp": 30,
+  "fluid": "VG46",
+  "maxTemp": 55,
+  "oilTemp": 50,
+  "tankArea": 0,
+  "tankK": 12,
+  "tankVolume": 100,
+  "crossStyle": "jump"
+ },
+ "components": [
+  {
+   "id": "cmweo3vhd3",
+   "type": "tank",
+   "x": 80,
+   "y": 230,
+   "rot": 0,
+   "flip": false,
+   "tag": "",
+   "params": {}
+  },
+  {
+   "id": "cmweo423v5",
+   "type": "pump_fixed",
+   "x": 150,
+   "y": 215,
+   "rot": 0,
+   "flip": false,
+   "tag": "P1",
+   "params": {}
+  },
+  {
+   "id": "cmweo4obf7",
+   "type": "relief",
+   "x": 217.5,
+   "y": 202.5,
+   "rot": 0,
+   "flip": false,
+   "tag": "RV1",
+   "params": {}
+  },
+  {
+   "id": "cmweo4vjm9",
+   "type": "dcv43",
+   "x": 155,
+   "y": 142.5,
+   "rot": 0,
+   "flip": false,
+   "tag": "SV1",
+   "params": {}
+  },
+  {
+   "id": "cmweo5b4gb",
+   "type": "cyl_double",
+   "x": 155,
+   "y": 90,
+   "rot": 0,
+   "flip": false,
+   "tag": "CYL1",
+   "params": {}
+  },
+  {
+   "id": "jmweo74p8g",
+   "type": "junction",
+   "x": 150,
+   "y": 192.5,
+   "rot": 0,
+   "flip": false,
+   "tag": "",
+   "params": {}
+  },
+  {
+   "id": "cmweo8ugl18",
+   "type": "tank",
+   "x": 182.5,
+   "y": 230,
+   "rot": 0,
+   "flip": false,
+   "tag": "",
+   "params": {}
+  },
+  {
+   "id": "cmweo90rw1a",
+   "type": "tank",
+   "x": 217.5,
+   "y": 230,
+   "rot": 0,
+   "flip": false,
+   "tag": "",
+   "params": {}
+  }
+ ],
+ "wires": [
+  {
+   "id": "wmweo6c9mc",
+   "a": {
+    "c": "cmweo423v5",
+    "p": "S"
+   },
+   "b": {
+    "c": "cmweo3vhd3",
+    "p": "T"
+   },
+   "kind": "main",
+   "pts": null,
+   "pipe": {}
+  },
+  {
+   "id": "wmweo6nyid",
+   "a": {
+    "c": "cmweo423v5",
+    "p": "P"
+   },
+   "b": {
+    "c": "jmweo74p8g",
+    "p": "J"
+   },
+   "kind": "main",
+   "pts": [
+    [
+     150,
+     207.5
+    ],
+    [
+     150,
+     192.5
+    ]
+   ],
+   "pipe": {}
+  },
+  {
+   "id": "wmweo6tx8e",
+   "a": {
+    "c": "cmweo4vjm9",
+    "p": "A"
+   },
+   "b": {
+    "c": "cmweo5b4gb",
+    "p": "H"
+   },
+   "kind": "main",
+   "pts": null,
+   "pipe": {}
+  },
+  {
+   "id": "wmweo6ukef",
+   "a": {
+    "c": "cmweo4vjm9",
+    "p": "B"
+   },
+   "b": {
+    "c": "cmweo5b4gb",
+    "p": "R"
+   },
+   "kind": "main",
+   "pts": null,
+   "pipe": {}
+  },
+  {
+   "id": "wmweo74p8h",
+   "a": {
+    "c": "jmweo74p8g",
+    "p": "J"
+   },
+   "b": {
+    "c": "cmweo4vjm9",
+    "p": "P"
+   },
+   "kind": "main",
+   "pts": [
+    [
+     150,
+     192.5
+    ],
+    [
+     150,
+     155
+    ],
+    [
+     152.5,
+     155
+    ],
+    [
+     152.5,
+     150
+    ]
+   ],
+   "pipe": {}
+  },
+  {
+   "id": "wmweo74p8i",
+   "a": {
+    "c": "cmweo4obf7",
+    "p": "P"
+   },
+   "b": {
+    "c": "jmweo74p8g",
+    "p": "J"
+   },
+   "kind": "main",
+   "pts": null,
+   "pipe": {}
+  },
+  {
+   "id": "wmweo9btv1b",
+   "a": {
+    "c": "cmweo4vjm9",
+    "p": "T"
+   },
+   "b": {
+    "c": "cmweo8ugl18",
+    "p": "T"
+   },
+   "kind": "main",
+   "pts": null,
+   "pipe": {}
+  },
+  {
+   "id": "wmweo9cpc1c",
+   "a": {
+    "c": "cmweo4obf7",
+    "p": "T"
+   },
+   "b": {
+    "c": "cmweo90rw1a",
+    "p": "T"
+   },
+   "kind": "main",
+   "pts": null,
+   "pipe": {}
+  }
+ ],
+ "frames": [],
+ "texts": [],
+ "id": "c20261113-164024"
+}

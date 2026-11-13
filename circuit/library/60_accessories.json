@@ -1,0 +1,46 @@
+{
+  "category": {"id": "accessories", "name": "付属機器", "order": 60},
+  "components": [
+    {
+      "type": "filter", "name": "フィルタ", "en": "Filter",
+      "jis": "JIS B 0125 表 17 流体調整機器 17-1", "tag": "F", "model": "filter", "symbol": "filter",
+      "ports": ["IN", "OUT"],
+      "spec": "{use}",
+      "params": [
+        {"key": "use", "label": "用途", "type": "select", "default": "return",
+         "options": [
+           {"value": "suction", "label": "サクションストレーナ", "set": {"dp_rated": 0.005, "bypass": 0}},
+           {"value": "line", "label": "ラインフィルタ", "set": {"dp_rated": 0.1, "bypass": 0.35}},
+           {"value": "return", "label": "リターンフィルタ", "set": {"dp_rated": 0.05, "bypass": 0.15}}]},
+        {"key": "q_rated", "label": "基準流量", "unit": "L/min", "min": 1, "max": 1000, "step": 1, "default": 60, "group": "圧力損失"},
+        {"key": "dp_rated", "label": "基準流量での圧力損失", "unit": "MPa", "min": 0.001, "max": 1, "step": 0.001, "default": 0.05, "group": "圧力損失"},
+        {"key": "bypass", "label": "バイパス弁の開き始め", "unit": "MPa", "min": 0, "max": 1, "step": 0.01, "default": 0.15, "group": "圧力損失",
+         "help": "0 のときはバイパス弁なし"}
+      ]
+    },
+    {
+      "type": "cooler", "name": "クーラ", "en": "Cooler",
+      "jis": "JIS B 0125 表 17 流体調整機器 17-8.1", "tag": "HE", "model": "cooler", "symbol": "cooler",
+      "ports": ["IN", "OUT"],
+      "spec": "交換熱量 {capacity} kW",
+      "params": [
+        {"key": "capacity", "label": "交換熱量", "unit": "kW", "min": 0, "max": 100, "step": 0.1, "default": 2.0,
+         "help": "油が流れている工程の間だけ、この熱量を取り除くものとして油温を見積もる"},
+        {"key": "coolant", "label": "冷却水の管路を描く", "type": "bool", "default": true, "symbol": true},
+        {"key": "q_rated", "label": "基準流量", "unit": "L/min", "min": 1, "max": 1000, "step": 1, "default": 60, "group": "圧力損失"},
+        {"key": "dp_rated", "label": "基準流量での圧力損失", "unit": "MPa", "min": 0.005, "max": 1, "step": 0.005, "default": 0.1, "group": "圧力損失"}
+      ]
+    },
+    {
+      "type": "gauge", "name": "圧力計", "en": "Pressure gauge",
+      "jis": "JIS B 0125 表 18 計測器 18-1.2", "tag": "PG", "model": "gauge", "symbol": "gauge",
+      "ports": ["P"],
+      "spec": "目盛り {range}",
+      "params": [
+        {"key": "range", "label": "目盛り上限", "type": "select", "default": "16",
+         "options": [{"value": "6", "label": "6 MPa"}, {"value": "10", "label": "10 MPa"}, {"value": "16", "label": "16 MPa"},
+                     {"value": "25", "label": "25 MPa"}, {"value": "40", "label": "40 MPa"}]}
+      ]
+    }
+  ]
+}

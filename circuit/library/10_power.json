@@ -1,0 +1,61 @@
+{
+  "category": {"id": "power", "name": "動力源・タンク", "order": 10},
+  "components": [
+    {
+      "type": "pump_fixed", "name": "定容量形ポンプ", "en": "Fixed displacement pump",
+      "jis": "JIS B 0125 表 9 ポンプ及びモータ", "tag": "P", "model": "pump_fixed", "symbol": "pump",
+      "ports": ["S", "P"], "optionalPorts": ["S"],
+      "spec": "{disp} cm³/rev × {speed} min⁻¹",
+      "params": [
+        {"key": "disp", "label": "押しのけ容積", "unit": "cm³/rev", "min": 1, "max": 250, "step": 0.1, "default": 8.0},
+        {"key": "speed", "label": "回転速度", "unit": "min⁻¹", "min": 600, "max": 3600, "step": 10, "default": 1800,
+         "help": "4 極電動機: 60 Hz で約 1800、50 Hz で約 1500"},
+        {"key": "eta_v", "label": "容積効率", "unit": "%", "min": 60, "max": 100, "step": 0.5, "default": 92,
+         "help": "定格圧力のときの値。圧力に比例して内部漏れが増えるものとして扱う"},
+        {"key": "eta_t", "label": "全効率", "unit": "%", "min": 40, "max": 100, "step": 0.5, "default": 85},
+        {"key": "p_rated", "label": "定格圧力", "unit": "MPa", "min": 1, "max": 40, "step": 0.5, "default": 21},
+        {"key": "drive", "label": "原動機の表示", "type": "select", "default": "motor", "symbol": true,
+         "options": [{"value": "motor", "label": "電動機を描く"}, {"value": "shaft", "label": "軸だけ"}]}
+      ]
+    },
+    {
+      "type": "pump_var", "name": "可変容量形ポンプ（圧力補償）", "en": "Variable displacement pump, pressure compensated",
+      "jis": "JIS B 0125 表 9 ポンプ及びモータ", "tag": "P", "model": "pump_var", "symbol": "pump",
+      "symbolArgs": {"variable": true},
+      "ports": ["S", "P"], "optionalPorts": ["S"],
+      "spec": "{disp} cm³/rev × {speed} min⁻¹ / カットオフ {p_comp} MPa",
+      "params": [
+        {"key": "disp", "label": "最大押しのけ容積", "unit": "cm³/rev", "min": 1, "max": 250, "step": 0.1, "default": 16.0},
+        {"key": "speed", "label": "回転速度", "unit": "min⁻¹", "min": 600, "max": 3600, "step": 10, "default": 1800},
+        {"key": "p_comp", "label": "カットオフ圧力", "unit": "MPa", "min": 1, "max": 35, "step": 0.1, "default": 7.0,
+         "help": "この圧力で吐出量が 0 になる（フルカットオフ）"},
+        {"key": "band", "label": "カットオフ幅", "unit": "MPa", "min": 0.1, "max": 3, "step": 0.05, "default": 0.7,
+         "help": "吐出量が絞られ始めてから 0 になるまでの圧力幅"},
+        {"key": "eta_v", "label": "容積効率", "unit": "%", "min": 60, "max": 100, "step": 0.5, "default": 92},
+        {"key": "eta_t", "label": "全効率", "unit": "%", "min": 40, "max": 100, "step": 0.5, "default": 85},
+        {"key": "p_rated", "label": "定格圧力", "unit": "MPa", "min": 1, "max": 40, "step": 0.5, "default": 21},
+        {"key": "drive", "label": "原動機の表示", "type": "select", "default": "motor", "symbol": true,
+         "options": [{"value": "motor", "label": "電動機を描く"}, {"value": "shaft", "label": "軸だけ"}]}
+      ]
+    },
+    {
+      "type": "tank", "name": "油タンク", "en": "Reservoir",
+      "jis": "JIS B 0125 表 16 油タンク（局所表示記号）", "tag": "", "model": "tank", "symbol": "tank",
+      "ports": ["T"], "bom": false,
+      "params": []
+    },
+    {
+      "type": "accumulator", "name": "アキュムレータ", "en": "Accumulator",
+      "jis": "JIS B 0125 表 10 エネルギー容器", "tag": "ACC", "model": "accumulator", "symbol": "accumulator",
+      "ports": ["P"],
+      "spec": "{volume} L / 封入 {precharge} MPa",
+      "params": [
+        {"key": "volume", "label": "ガス封入量（呼び容量）", "unit": "L", "min": 0.1, "max": 100, "step": 0.1, "default": 1.0},
+        {"key": "precharge", "label": "ガス封入圧力", "unit": "MPa", "min": 0.1, "max": 30, "step": 0.1, "default": 5.0},
+        {"key": "p_min", "label": "最低作動圧力", "unit": "MPa", "min": 0.1, "max": 35, "step": 0.1, "default": 6.0},
+        {"key": "p_max", "label": "最高作動圧力", "unit": "MPa", "min": 0.1, "max": 35, "step": 0.1, "default": 10.0,
+         "help": "定常計算では流量 0 として扱う。放出量だけを参考に表示する"}
+      ]
+    }
+  ]
+}

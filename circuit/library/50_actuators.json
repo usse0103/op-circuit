@@ -1,0 +1,42 @@
+{
+  "category": {"id": "actuators", "name": "アクチュエータ", "order": 50},
+  "components": [
+    {
+      "type": "cyl_double", "name": "複動片ロッドシリンダ", "en": "Double acting cylinder, single rod",
+      "jis": "JIS B 0125 表 9 シリンダ", "tag": "CYL", "model": "cyl_double", "symbol": "cylinder",
+      "ports": ["H", "R"],
+      "spec": "φ{bore} × φ{rod} × {stroke} st",
+      "states": {"default": "move", "options": [
+        {"value": "move", "label": "移動", "title": "ストロークの途中（負荷に応じて動く）"},
+        {"value": "stall", "label": "停止", "title": "ストロークエンドまたは機械的に停止"}]},
+      "params": [
+        {"key": "bore", "label": "シリンダ内径", "unit": "mm", "min": 20, "max": 400, "step": 1, "default": 63},
+        {"key": "rod", "label": "ロッド径", "unit": "mm", "min": 8, "max": 300, "step": 1, "default": 35.5},
+        {"key": "stroke", "label": "ストローク", "unit": "mm", "min": 10, "max": 5000, "step": 5, "default": 300},
+        {"key": "f_ext", "label": "伸びに逆らう負荷", "unit": "kN", "min": -500, "max": 2000, "step": 0.1, "default": 15.0,
+         "help": "押すときの負荷。負の値は、負荷がロッドを引き出す向き（自走する向き）"},
+        {"key": "f_ret", "label": "縮みに逆らう負荷", "unit": "kN", "min": -500, "max": 2000, "step": 0.1, "default": 2.0,
+         "help": "引くときの負荷。負の値は、負荷がロッドを押し込む向き"},
+        {"key": "eta", "label": "推力効率", "unit": "%", "min": 50, "max": 100, "step": 1, "default": 90,
+         "help": "しゅう動抵抗を見込む係数。0.9～0.95 が目安"},
+        {"key": "rod_side", "label": "ロッドの向き", "type": "select", "default": "right", "symbol": true,
+         "options": [{"value": "right", "label": "右"}, {"value": "left", "label": "左"}]}
+      ]
+    },
+    {
+      "type": "motor_hyd", "name": "油圧モータ（定容量形）", "en": "Hydraulic motor, fixed displacement",
+      "jis": "JIS B 0125 表 9 ポンプ及びモータ", "tag": "M", "model": "motor_hyd", "symbol": "motor_hyd",
+      "ports": ["A", "B"],
+      "spec": "{disp} cm³/rev",
+      "states": {"default": "move", "options": [
+        {"value": "move", "label": "回転", "title": "負荷に応じて回る"},
+        {"value": "stall", "label": "停止", "title": "機械的に停止"}]},
+      "params": [
+        {"key": "disp", "label": "押しのけ容積", "unit": "cm³/rev", "min": 1, "max": 2000, "step": 1, "default": 50},
+        {"key": "torque", "label": "負荷トルク", "unit": "N·m", "min": 0, "max": 20000, "step": 1, "default": 40},
+        {"key": "eta_v", "label": "容積効率", "unit": "%", "min": 60, "max": 100, "step": 0.5, "default": 95},
+        {"key": "eta_m", "label": "トルク効率", "unit": "%", "min": 60, "max": 100, "step": 0.5, "default": 90}
+      ]
+    }
+  ]
+}

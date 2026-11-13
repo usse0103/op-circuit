@@ -1,0 +1,435 @@
+{
+ "components": [
+  {
+   "rot": 0,
+   "flip": false,
+   "tag": "CYL1",
+   "params": {
+    "bore": 63,
+    "f_ext": 12,
+    "f_ret": 2,
+    "rod": 35.5,
+    "stroke": 300
+   },
+   "id": "cyl",
+   "type": "cyl_double",
+   "x": 215,
+   "y": 52.5
+  },
+  {
+   "rot": 180,
+   "flip": false,
+   "tag": "TCV1",
+   "params": {
+    "d": 1.6
+   },
+   "id": "tcv",
+   "type": "throttle_check",
+   "x": 222.5,
+   "y": 85
+  },
+  {
+   "rot": 0,
+   "flip": false,
+   "tag": "SV1",
+   "params": {
+    "center": "tandem",
+    "size": "01"
+   },
+   "id": "sv",
+   "type": "dcv43",
+   "x": 210,
+   "y": 120
+  },
+  {
+   "rot": 0,
+   "flip": false,
+   "tag": "P1",
+   "params": {
+    "disp": 8,
+    "speed": 1800
+   },
+   "id": "pump",
+   "type": "pump_fixed",
+   "x": 120,
+   "y": 215
+  },
+  {
+   "rot": 0,
+   "flip": false,
+   "tag": "F1",
+   "params": {
+    "bypass": 0,
+    "dp_rated": 0.005,
+    "use": "suction"
+   },
+   "id": "str",
+   "type": "filter",
+   "x": 120,
+   "y": 240
+  },
+  {
+   "rot": 0,
+   "flip": false,
+   "tag": "",
+   "params": {},
+   "id": "tk1",
+   "type": "tank",
+   "x": 120,
+   "y": 252.5
+  },
+  {
+   "rot": 0,
+   "flip": false,
+   "tag": "",
+   "params": {},
+   "id": "j1",
+   "type": "junction",
+   "x": 120,
+   "y": 180
+  },
+  {
+   "rot": 0,
+   "flip": false,
+   "tag": "",
+   "params": {},
+   "id": "j2",
+   "type": "junction",
+   "x": 147.5,
+   "y": 180
+  },
+  {
+   "rot": 0,
+   "flip": false,
+   "tag": "",
+   "params": {},
+   "id": "j3",
+   "type": "junction",
+   "x": 175,
+   "y": 180
+  },
+  {
+   "rot": 0,
+   "flip": false,
+   "tag": "PG1",
+   "params": {
+    "range": "16"
+   },
+   "id": "pg",
+   "type": "gauge",
+   "x": 152.5,
+   "y": 170
+  },
+  {
+   "rot": 0,
+   "flip": false,
+   "tag": "RV1",
+   "params": {
+    "p_set": 7
+   },
+   "id": "rv",
+   "type": "relief",
+   "x": 175,
+   "y": 200
+  },
+  {
+   "rot": 0,
+   "flip": false,
+   "tag": "",
+   "params": {},
+   "id": "tk2",
+   "type": "tank",
+   "x": 175,
+   "y": 215
+  },
+  {
+   "rot": 0,
+   "flip": false,
+   "tag": "F2",
+   "params": {
+    "bypass": 0.15,
+    "dp_rated": 0.05,
+    "use": "return"
+   },
+   "id": "rf",
+   "type": "filter",
+   "x": 212.5,
+   "y": 200
+  },
+  {
+   "rot": 0,
+   "flip": false,
+   "tag": "",
+   "params": {},
+   "id": "tk3",
+   "type": "tank",
+   "x": 212.5,
+   "y": 215
+  }
+ ],
+ "format": "hc-circuit/1",
+ "frames": [
+  {
+   "h": 127.5,
+   "id": "f1",
+   "label": "油圧ユニット",
+   "w": 127.5,
+   "x": 97.5,
+   "y": 137.5
+  }
+ ],
+ "id": "c20261113-160202",
+ "meta": {
+  "title": "シリンダ前後進回路（メータアウト）",
+  "drawingNo": "",
+  "project": "見本",
+  "customer": "",
+  "author": "",
+  "checker": "",
+  "approver": "",
+  "date": "2026-11-13",
+  "rev": "",
+  "sheet": "A3",
+  "scale": "NTS",
+  "notes": "リリーフ弁の設定圧力は 7 MPa とする。\n前進速度は一方向絞り弁（TCV1）で調整する。",
+  "showBom": true
+ },
+ "settings": {
+  "ambTemp": 30,
+  "fluid": "VG46",
+  "maxTemp": 55,
+  "oilTemp": 50,
+  "tankArea": 0,
+  "tankK": 12,
+  "tankVolume": 60,
+  "crossStyle": "jump"
+ },
+ "steps": [
+  {
+   "duration": 0,
+   "id": "s1",
+   "name": "前進",
+   "states": {}
+  },
+  {
+   "duration": 5,
+   "id": "s2",
+   "name": "加圧保持",
+   "states": {
+    "cyl": "stall",
+    "sv": "a"
+   }
+  },
+  {
+   "duration": 0,
+   "id": "s3",
+   "name": "後退",
+   "states": {}
+  },
+  {
+   "duration": 10,
+   "id": "s4",
+   "name": "待機",
+   "states": {}
+  }
+ ],
+ "texts": [],
+ "wires": [
+  {
+   "kind": "main",
+   "pts": null,
+   "pipe": {},
+   "a": {
+    "c": "tk1",
+    "p": "T"
+   },
+   "b": {
+    "c": "str",
+    "p": "OUT"
+   },
+   "id": "w1"
+  },
+  {
+   "kind": "main",
+   "pts": null,
+   "pipe": {},
+   "a": {
+    "c": "str",
+    "p": "IN"
+   },
+   "b": {
+    "c": "pump",
+    "p": "S"
+   },
+   "id": "w2"
+  },
+  {
+   "kind": "main",
+   "pts": null,
+   "pipe": {},
+   "a": {
+    "c": "pump",
+    "p": "P"
+   },
+   "b": {
+    "c": "j1",
+    "p": "J"
+   },
+   "id": "w3"
+  },
+  {
+   "kind": "main",
+   "pts": null,
+   "pipe": {},
+   "a": {
+    "c": "j1",
+    "p": "J"
+   },
+   "b": {
+    "c": "j2",
+    "p": "J"
+   },
+   "id": "w4"
+  },
+  {
+   "kind": "main",
+   "pts": null,
+   "pipe": {},
+   "a": {
+    "c": "j2",
+    "p": "J"
+   },
+   "b": {
+    "c": "pg",
+    "p": "P"
+   },
+   "id": "w5"
+  },
+  {
+   "kind": "main",
+   "pts": null,
+   "pipe": {},
+   "a": {
+    "c": "j2",
+    "p": "J"
+   },
+   "b": {
+    "c": "j3",
+    "p": "J"
+   },
+   "id": "w6"
+  },
+  {
+   "kind": "main",
+   "pts": null,
+   "pipe": {},
+   "a": {
+    "c": "j3",
+    "p": "J"
+   },
+   "b": {
+    "c": "rv",
+    "p": "P"
+   },
+   "id": "w7"
+  },
+  {
+   "kind": "main",
+   "pts": null,
+   "pipe": {},
+   "a": {
+    "c": "rv",
+    "p": "T"
+   },
+   "b": {
+    "c": "tk2",
+    "p": "T"
+   },
+   "id": "w8"
+  },
+  {
+   "kind": "main",
+   "pts": null,
+   "pipe": {},
+   "a": {
+    "c": "j3",
+    "p": "J"
+   },
+   "b": {
+    "c": "sv",
+    "p": "P"
+   },
+   "id": "w9"
+  },
+  {
+   "kind": "main",
+   "pts": null,
+   "pipe": {},
+   "a": {
+    "c": "sv",
+    "p": "T"
+   },
+   "b": {
+    "c": "rf",
+    "p": "IN"
+   },
+   "id": "w10"
+  },
+  {
+   "kind": "main",
+   "pts": null,
+   "pipe": {},
+   "a": {
+    "c": "rf",
+    "p": "OUT"
+   },
+   "b": {
+    "c": "tk3",
+    "p": "T"
+   },
+   "id": "w11"
+  },
+  {
+   "kind": "main",
+   "pts": null,
+   "pipe": {},
+   "a": {
+    "c": "sv",
+    "p": "A"
+   },
+   "b": {
+    "c": "cyl",
+    "p": "H"
+   },
+   "id": "w12"
+  },
+  {
+   "kind": "main",
+   "pts": null,
+   "pipe": {},
+   "a": {
+    "c": "sv",
+    "p": "B"
+   },
+   "b": {
+    "c": "tcv",
+    "p": "OUT"
+   },
+   "id": "w13"
+  },
+  {
+   "kind": "main",
+   "pts": null,
+   "pipe": {},
+   "a": {
+    "c": "tcv",
+    "p": "IN"
+   },
+   "b": {
+    "c": "cyl",
+    "p": "R"
+   },
+   "id": "w14"
+  }
+ ]
+}

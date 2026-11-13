@@ -1,0 +1,703 @@
+{
+ "components": [
+  {
+   "rot": 0,
+   "flip": false,
+   "tag": "P1",
+   "params": {
+    "band": 0.7,
+    "disp": 16,
+    "p_comp": 7,
+    "speed": 1800
+   },
+   "id": "pump",
+   "type": "pump_var",
+   "x": 60,
+   "y": 215
+  },
+  {
+   "rot": 0,
+   "flip": false,
+   "tag": "F1",
+   "params": {
+    "bypass": 0,
+    "dp_rated": 0.005,
+    "use": "suction"
+   },
+   "id": "str",
+   "type": "filter",
+   "x": 60,
+   "y": 237.5
+  },
+  {
+   "rot": 0,
+   "flip": false,
+   "tag": "",
+   "params": {},
+   "id": "tk1",
+   "type": "tank",
+   "x": 60,
+   "y": 250
+  },
+  {
+   "rot": 0,
+   "flip": false,
+   "tag": "",
+   "params": {},
+   "id": "jr",
+   "type": "junction",
+   "x": 60,
+   "y": 170
+  },
+  {
+   "rot": 0,
+   "flip": false,
+   "tag": "RV1",
+   "params": {
+    "p_set": 8.5
+   },
+   "id": "rv",
+   "type": "relief",
+   "x": 92.5,
+   "y": 182.5
+  },
+  {
+   "rot": 0,
+   "flip": false,
+   "tag": "",
+   "params": {},
+   "id": "tk2",
+   "type": "tank",
+   "x": 85,
+   "y": 200
+  },
+  {
+   "rot": 0,
+   "flip": false,
+   "tag": "",
+   "params": {},
+   "id": "jg",
+   "type": "junction",
+   "x": 60,
+   "y": 160
+  },
+  {
+   "rot": 0,
+   "flip": false,
+   "tag": "PG1",
+   "params": {
+    "range": "16"
+   },
+   "id": "pg",
+   "type": "gauge",
+   "x": 60,
+   "y": 152.5
+  },
+  {
+   "rot": 0,
+   "flip": false,
+   "tag": "",
+   "params": {},
+   "id": "jp",
+   "type": "junction",
+   "x": 127.5,
+   "y": 160
+  },
+  {
+   "rot": 0,
+   "flip": false,
+   "tag": "MV1",
+   "params": {
+    "center": "closed",
+    "layers": [
+     {
+      "kind": "reducing",
+      "line": "P",
+      "p_set": 3.5
+     },
+     {
+      "kind": "pcheck",
+      "line": "AB",
+      "ratio": 3
+     }
+    ],
+    "size": "01"
+   },
+   "id": "mv1",
+   "type": "stack",
+   "x": 157.5,
+   "y": 117.5
+  },
+  {
+   "rot": 0,
+   "flip": false,
+   "tag": "MV2",
+   "params": {
+    "center": "closed",
+    "layers": [
+     {
+      "kind": "pcheck",
+      "line": "AB",
+      "ratio": 3
+     },
+     {
+      "d": 1.2,
+      "kind": "tcheck",
+      "line": "AB",
+      "mode": "out"
+     }
+    ],
+    "size": "01"
+   },
+   "id": "mv2",
+   "type": "stack",
+   "x": 267.5,
+   "y": 130
+  },
+  {
+   "rot": 0,
+   "flip": false,
+   "tag": "CYL1",
+   "params": {
+    "bore": 50,
+    "f_ext": 4,
+    "f_ret": 0.5,
+    "rod": 28,
+    "stroke": 100
+   },
+   "id": "cyl1",
+   "type": "cyl_double",
+   "x": 205,
+   "y": 35
+  },
+  {
+   "rot": 0,
+   "flip": false,
+   "tag": "CYL2",
+   "params": {
+    "bore": 63,
+    "f_ext": 8,
+    "f_ret": 1,
+    "rod": 35.5,
+    "stroke": 400
+   },
+   "id": "cyl2",
+   "type": "cyl_double",
+   "x": 325,
+   "y": 35
+  },
+  {
+   "rot": 0,
+   "flip": false,
+   "tag": "",
+   "params": {},
+   "id": "jt",
+   "type": "junction",
+   "x": 262.5,
+   "y": 150
+  },
+  {
+   "rot": 270,
+   "flip": false,
+   "tag": "HE1",
+   "params": {
+    "capacity": 1
+   },
+   "id": "he",
+   "type": "cooler",
+   "x": 355,
+   "y": 150
+  },
+  {
+   "rot": 270,
+   "flip": false,
+   "tag": "F2",
+   "params": {
+    "bypass": 0.15,
+    "dp_rated": 0.05,
+    "use": "return"
+   },
+   "id": "rf",
+   "type": "filter",
+   "x": 380,
+   "y": 150
+  },
+  {
+   "rot": 0,
+   "flip": false,
+   "tag": "",
+   "params": {},
+   "id": "tk3",
+   "type": "tank",
+   "x": 397.5,
+   "y": 160
+  },
+  {
+   "id": "jmwen84k71h",
+   "type": "junction",
+   "x": 190,
+   "y": 150,
+   "rot": 0,
+   "flip": false,
+   "tag": "",
+   "params": {}
+  },
+  {
+   "id": "jmwen86d41k",
+   "type": "junction",
+   "x": 215,
+   "y": 150,
+   "rot": 0,
+   "flip": false,
+   "tag": "",
+   "params": {}
+  },
+  {
+   "id": "jmwenb9hda0",
+   "type": "junction",
+   "x": 60,
+   "y": 190,
+   "rot": 0,
+   "flip": false,
+   "tag": "",
+   "params": {}
+  }
+ ],
+ "format": "hc-circuit/1",
+ "frames": [
+  {
+   "h": 132.5,
+   "id": "f1",
+   "label": "油圧ユニット",
+   "w": 92.5,
+   "x": 25,
+   "y": 127.5
+  }
+ ],
+ "id": "c20261113-160203",
+ "meta": {
+  "title": "クランプ・送り回路（積層弁）",
+  "drawingNo": "",
+  "project": "見本",
+  "customer": "",
+  "author": "",
+  "checker": "",
+  "approver": "",
+  "date": "2026-11-13",
+  "rev": "",
+  "sheet": "A3",
+  "scale": "NTS",
+  "notes": "MV1 はクランプ用。減圧弁でクランプ力を制限し、パイロット操作逆止め弁で保持する。\nMV2 は送り用。メータアウトの一方向絞り弁はパイロット操作逆止め弁よりベース側に置く。",
+  "showBom": true
+ },
+ "settings": {
+  "ambTemp": 30,
+  "fluid": "VG46",
+  "maxTemp": 55,
+  "oilTemp": 50,
+  "tankArea": 0,
+  "tankK": 12,
+  "tankVolume": 100,
+  "crossStyle": "jump"
+ },
+ "steps": [
+  {
+   "duration": 0,
+   "id": "s1",
+   "name": "クランプ",
+   "states": {
+    "mv1": "b"
+   }
+  },
+  {
+   "duration": 0,
+   "id": "s2",
+   "name": "送り前進",
+   "states": {
+    "mv2": "a"
+   }
+  },
+  {
+   "duration": 0,
+   "id": "s3",
+   "name": "送り後退",
+   "states": {
+    "mv2": "b"
+   }
+  },
+  {
+   "duration": 0,
+   "id": "s4",
+   "name": "アンクランプ",
+   "states": {
+    "mv1": "b"
+   }
+  },
+  {
+   "duration": 10,
+   "id": "s5",
+   "name": "待機",
+   "states": {}
+  }
+ ],
+ "texts": [],
+ "wires": [
+  {
+   "kind": "main",
+   "pts": null,
+   "pipe": {},
+   "a": {
+    "c": "tk1",
+    "p": "T"
+   },
+   "b": {
+    "c": "str",
+    "p": "OUT"
+   },
+   "id": "w1"
+  },
+  {
+   "kind": "main",
+   "pts": null,
+   "pipe": {},
+   "a": {
+    "c": "str",
+    "p": "IN"
+   },
+   "b": {
+    "c": "pump",
+    "p": "S"
+   },
+   "id": "w2"
+  },
+  {
+   "kind": "main",
+   "pts": [
+    [
+     60,
+     207.5
+    ],
+    [
+     60,
+     190
+    ]
+   ],
+   "pipe": {},
+   "a": {
+    "c": "pump",
+    "p": "P"
+   },
+   "b": {
+    "c": "jmwenb9hda0",
+    "p": "J"
+   },
+   "id": "w3"
+  },
+  {
+   "kind": "main",
+   "pts": null,
+   "pipe": {},
+   "a": {
+    "c": "jr",
+    "p": "J"
+   },
+   "b": {
+    "c": "rv",
+    "p": "P"
+   },
+   "id": "w4"
+  },
+  {
+   "kind": "main",
+   "pts": null,
+   "pipe": {},
+   "a": {
+    "c": "rv",
+    "p": "T"
+   },
+   "b": {
+    "c": "tk2",
+    "p": "T"
+   },
+   "id": "w5"
+  },
+  {
+   "kind": "main",
+   "pts": null,
+   "pipe": {},
+   "a": {
+    "c": "jr",
+    "p": "J"
+   },
+   "b": {
+    "c": "jg",
+    "p": "J"
+   },
+   "id": "w6"
+  },
+  {
+   "kind": "main",
+   "pts": null,
+   "pipe": {},
+   "a": {
+    "c": "jg",
+    "p": "J"
+   },
+   "b": {
+    "c": "pg",
+    "p": "P"
+   },
+   "id": "w7"
+  },
+  {
+   "kind": "main",
+   "pts": null,
+   "pipe": {},
+   "a": {
+    "c": "jg",
+    "p": "J"
+   },
+   "b": {
+    "c": "jp",
+    "p": "J"
+   },
+   "id": "w8"
+  },
+  {
+   "kind": "main",
+   "pts": null,
+   "pipe": {},
+   "a": {
+    "c": "jp",
+    "p": "J"
+   },
+   "b": {
+    "c": "mv1",
+    "p": "P"
+   },
+   "id": "w9"
+  },
+  {
+   "kind": "main",
+   "pts": null,
+   "pipe": {},
+   "a": {
+    "c": "jp",
+    "p": "J"
+   },
+   "b": {
+    "c": "mv2",
+    "p": "P"
+   },
+   "id": "w10"
+  },
+  {
+   "kind": "main",
+   "pts": [
+    [
+     150,
+     117.5
+    ],
+    [
+     150,
+     150
+    ],
+    [
+     190,
+     150
+    ]
+   ],
+   "pipe": {},
+   "a": {
+    "c": "mv1",
+    "p": "T"
+   },
+   "b": {
+    "c": "jmwen84k71h",
+    "p": "J"
+   },
+   "id": "w11"
+  },
+  {
+   "kind": "main",
+   "pts": null,
+   "pipe": {},
+   "a": {
+    "c": "mv2",
+    "p": "T"
+   },
+   "b": {
+    "c": "jt",
+    "p": "J"
+   },
+   "id": "w12"
+  },
+  {
+   "kind": "main",
+   "pts": null,
+   "pipe": {},
+   "a": {
+    "c": "jt",
+    "p": "J"
+   },
+   "b": {
+    "c": "he",
+    "p": "IN"
+   },
+   "id": "w13"
+  },
+  {
+   "kind": "main",
+   "pts": null,
+   "pipe": {},
+   "a": {
+    "c": "he",
+    "p": "OUT"
+   },
+   "b": {
+    "c": "rf",
+    "p": "IN"
+   },
+   "id": "w14"
+  },
+  {
+   "kind": "main",
+   "pts": null,
+   "pipe": {},
+   "a": {
+    "c": "rf",
+    "p": "OUT"
+   },
+   "b": {
+    "c": "tk3",
+    "p": "T"
+   },
+   "id": "w15"
+  },
+  {
+   "kind": "main",
+   "pts": null,
+   "pipe": {},
+   "a": {
+    "c": "mv1",
+    "p": "A"
+   },
+   "b": {
+    "c": "cyl1",
+    "p": "H"
+   },
+   "id": "w16"
+  },
+  {
+   "kind": "main",
+   "pts": null,
+   "pipe": {},
+   "a": {
+    "c": "mv1",
+    "p": "B"
+   },
+   "b": {
+    "c": "cyl1",
+    "p": "R"
+   },
+   "id": "w17"
+  },
+  {
+   "kind": "main",
+   "pts": null,
+   "pipe": {},
+   "a": {
+    "c": "mv2",
+    "p": "A"
+   },
+   "b": {
+    "c": "cyl2",
+    "p": "H"
+   },
+   "id": "w18"
+  },
+  {
+   "kind": "main",
+   "pts": null,
+   "pipe": {},
+   "a": {
+    "c": "mv2",
+    "p": "B"
+   },
+   "b": {
+    "c": "cyl2",
+    "p": "R"
+   },
+   "id": "w19"
+  },
+  {
+   "id": "wmwen84k81i",
+   "a": {
+    "c": "jmwen84k71h",
+    "p": "J"
+   },
+   "b": {
+    "c": "jmwen86d41k",
+    "p": "J"
+   },
+   "kind": "main",
+   "pts": [
+    [
+     190,
+     150
+    ],
+    [
+     215,
+     150
+    ]
+   ],
+   "pipe": {}
+  },
+  {
+   "id": "wmwen86d41l",
+   "a": {
+    "c": "jmwen86d41k",
+    "p": "J"
+   },
+   "b": {
+    "c": "jt",
+    "p": "J"
+   },
+   "kind": "main",
+   "pts": [
+    [
+     215,
+     150
+    ],
+    [
+     262.5,
+     150
+    ]
+   ],
+   "pipe": {}
+  },
+  {
+   "id": "wmwenb9hda1",
+   "a": {
+    "c": "jmwenb9hda0",
+    "p": "J"
+   },
+   "b": {
+    "c": "jr",
+    "p": "J"
+   },
+   "kind": "main",
+   "pts": [
+    [
+     60,
+     190
+    ],
+    [
+     60,
+     170
+    ]
+   ],
+   "pipe": {}
+  }
+ ]
+}

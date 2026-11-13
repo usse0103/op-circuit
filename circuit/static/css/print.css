@@ -1,0 +1,44 @@
+/* 印刷用。1 ページ目は図面（用紙ぴったり）、続けて計算書（A4 縦）。
+   @page の寸法は用紙サイズに合わせて print.js が入れる。
+   計算書の体裁（.pp-report）は、画面の「計算書を見る」でも同じものを使う。 */
+#print-root { display: none; }
+
+.pp-report { font: 9pt/1.5 "Yu Gothic UI", "Meiryo", "Hiragino Sans", sans-serif; color: #000; background: #fff; }
+.pp-report .rp-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 16pt; padding-bottom: 6pt; border-bottom: 1.4pt solid #000; }
+.pp-report .rp-kind { font-size: 8.5pt; letter-spacing: .2em; }
+.pp-report h1 { margin: 0; font-size: 16pt; letter-spacing: .04em; }
+.pp-report h2 { margin: 12pt 0 4pt; font-size: 10.5pt; padding-left: 6pt; border-left: 3pt solid #000; break-after: avoid; }
+.pp-report h3 { margin: 8pt 0 3pt; font-size: 9.5pt; break-after: avoid; }
+.pp-report table { border-collapse: collapse; width: 100%; }
+.pp-report .rp-meta { width: auto; font-size: 8.5pt; }
+.pp-report .rp-meta th { text-align: left; font-weight: 400; color: #444; padding: 0 6pt 0 10pt; white-space: nowrap; }
+.pp-report .rp-meta td { min-width: 70pt; border-bottom: .5pt solid #999; padding: 0 4pt; }
+.pp-report table.rp th, .pp-report table.rp td { border: .5pt solid #555; padding: 2pt 4pt; vertical-align: top; }
+.pp-report table.rp th { background: #eee; font-weight: 600; font-size: 8pt; text-align: left; white-space: nowrap; }
+.pp-report table.rp td.n { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.pp-report table.rp td.c { text-align: center; white-space: nowrap; }
+.pp-report table.rp td.small { font-size: 8pt; }
+.pp-report table.rp td.mono { font-family: "Consolas", monospace; white-space: nowrap; }
+.pp-report table.rp.kv th { width: 22%; }
+.pp-report table.rp.kv td { width: 28%; }
+.pp-report table.rp.formulas td:first-child { white-space: nowrap; font-weight: 600; }
+.pp-report table.rp.formulas td:nth-child(2) { font-family: "Cambria Math", "Times New Roman", serif; font-size: 9.5pt; white-space: nowrap; }
+.pp-report table.rp tr { break-inside: avoid; }
+.pp-report .dim { color: #777; }
+.pp-report .lv-error, .pp-report .lv-warn { font-weight: 700; }
+.pp-report .rp-note { font-size: 8pt; color: #333; margin-top: 6pt; }
+
+/* 画面で計算書を見るとき */
+.report-view { background: #3a4252; padding: 18px; border-radius: 8px; }
+.report-view .pp-report { width: 184mm; max-width: 100%; margin: 0 auto; padding: 12mm 11mm; box-shadow: 0 10px 34px rgba(0, 0, 0, .55); }
+
+@media print {
+  html, body { height: auto !important; overflow: visible !important; background: #fff !important; }
+  #app, #modal-root, #toast, .calcpad { display: none !important; }
+  #print-root { display: block; color: #000; }
+  .pp { break-after: page; page-break-after: always; }
+  .pp:last-child { break-after: auto; page-break-after: auto; }
+  .pp-sheet { margin: 0; padding: 0; overflow: hidden; }
+  .pp-sheet svg { display: block; width: 100%; height: 100%; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}

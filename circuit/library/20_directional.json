@@ -1,0 +1,117 @@
+{
+  "category": {"id": "directional", "name": "方向制御弁", "order": 20},
+  "components": [
+    {
+      "type": "dcv43", "name": "4 ポート 3 位置切換弁", "en": "4-port 3-position directional control valve",
+      "jis": "JIS B 0125 表 12 切換弁", "tag": "SV", "model": "dcv43", "symbol": "dcv43",
+      "ports": ["P", "T", "A", "B"],
+      "spec": "呼び {size} / {center}",
+      "states": {"default": "n", "options": [
+        {"value": "a", "label": "a", "title": "SOL a 励磁（P→A, B→T）"},
+        {"value": "n", "label": "中立", "title": "中立"},
+        {"value": "b", "label": "b", "title": "SOL b 励磁（P→B, A→T）"}]},
+      "params": [
+        {"key": "size", "label": "呼び径（取付面）", "type": "select", "default": "01",
+         "options": [
+           {"value": "01", "label": "01（ISO 4401-03）", "set": {"q_rated": 30, "dp_rated": 0.4}},
+           {"value": "03", "label": "03（ISO 4401-05）", "set": {"q_rated": 80, "dp_rated": 0.4}},
+           {"value": "04", "label": "04（ISO 4401-07）", "set": {"q_rated": 200, "dp_rated": 0.4}},
+           {"value": "06", "label": "06（ISO 4401-08）", "set": {"q_rated": 400, "dp_rated": 0.4}}]},
+        {"key": "center", "label": "中立位置（スプール形式）", "type": "select", "default": "closed", "symbol": true,
+         "options": [
+           {"value": "closed", "label": "2: クローズドセンタ"},
+           {"value": "open", "label": "3: オープンセンタ"},
+           {"value": "float", "label": "4: ABT 接続"},
+           {"value": "tandem", "label": "60: PT 接続"},
+           {"value": "pab", "label": "9: PAB 接続"}]},
+        {"key": "actuation", "label": "操作方式", "type": "select", "default": "sol", "symbol": true,
+         "options": [
+           {"value": "sol", "label": "電磁操作・スプリングセンタ"},
+           {"value": "lever", "label": "手動レバー・スプリングセンタ"},
+           {"value": "detent", "label": "手動レバー・デテント"}]},
+        {"key": "q_rated", "label": "基準流量", "unit": "L/min", "min": 1, "max": 600, "step": 1, "default": 30, "group": "圧力損失",
+         "help": "カタログの圧力損失線図から読んだ 1 点。代表値なので実機の値で上書きする"},
+        {"key": "dp_rated", "label": "基準流量での圧力損失（1 流路）", "unit": "MPa", "min": 0.02, "max": 3, "step": 0.01, "default": 0.4, "group": "圧力損失"}
+      ]
+    },
+    {
+      "type": "dcv42", "name": "4 ポート 2 位置切換弁", "en": "4-port 2-position directional control valve",
+      "jis": "JIS B 0125 表 12 切換弁", "tag": "SV", "model": "dcv42", "symbol": "dcv42",
+      "ports": ["P", "T", "A", "B"],
+      "spec": "呼び {size}",
+      "states": {"default": "off", "options": [
+        {"value": "off", "label": "OFF", "title": "非励磁"},
+        {"value": "on", "label": "ON", "title": "励磁"}]},
+      "params": [
+        {"key": "size", "label": "呼び径（取付面）", "type": "select", "default": "01",
+         "options": [
+           {"value": "01", "label": "01（ISO 4401-03）", "set": {"q_rated": 30, "dp_rated": 0.4}},
+           {"value": "03", "label": "03（ISO 4401-05）", "set": {"q_rated": 80, "dp_rated": 0.4}},
+           {"value": "04", "label": "04（ISO 4401-07）", "set": {"q_rated": 200, "dp_rated": 0.4}},
+           {"value": "06", "label": "06（ISO 4401-08）", "set": {"q_rated": 400, "dp_rated": 0.4}}]},
+        {"key": "normal", "label": "非励磁のときの流路", "type": "select", "default": "PB", "symbol": true,
+         "options": [{"value": "PB", "label": "P→B, A→T"}, {"value": "PA", "label": "P→A, B→T"}]},
+        {"key": "actuation", "label": "操作方式", "type": "select", "default": "sol", "symbol": true,
+         "options": [
+           {"value": "sol", "label": "電磁操作・スプリングオフセット"},
+           {"value": "lever", "label": "手動レバー・スプリングオフセット"}]},
+        {"key": "q_rated", "label": "基準流量", "unit": "L/min", "min": 1, "max": 600, "step": 1, "default": 30, "group": "圧力損失"},
+        {"key": "dp_rated", "label": "基準流量での圧力損失（1 流路）", "unit": "MPa", "min": 0.02, "max": 3, "step": 0.01, "default": 0.4, "group": "圧力損失"}
+      ]
+    },
+    {
+      "type": "dcv22", "name": "2 ポート 2 位置切換弁", "en": "2-port 2-position directional control valve",
+      "jis": "JIS B 0125 表 12 切換弁", "tag": "SV", "model": "dcv22", "symbol": "dcv22",
+      "ports": ["P", "A"],
+      "spec": "呼び {size} / {normal}",
+      "states": {"default": "off", "options": [
+        {"value": "off", "label": "OFF", "title": "非励磁"},
+        {"value": "on", "label": "ON", "title": "励磁"}]},
+      "params": [
+        {"key": "size", "label": "呼び径", "type": "select", "default": "01",
+         "options": [
+           {"value": "01", "label": "01（ISO 4401-03）", "set": {"q_rated": 30, "dp_rated": 0.4}},
+           {"value": "03", "label": "03（ISO 4401-05）", "set": {"q_rated": 80, "dp_rated": 0.4}}]},
+        {"key": "normal", "label": "非励磁のとき", "type": "select", "default": "closed", "symbol": true,
+         "options": [{"value": "closed", "label": "閉（ノーマルクローズ）"}, {"value": "open", "label": "開（ノーマルオープン）"}]},
+        {"key": "q_rated", "label": "基準流量", "unit": "L/min", "min": 1, "max": 600, "step": 1, "default": 30, "group": "圧力損失"},
+        {"key": "dp_rated", "label": "基準流量での圧力損失", "unit": "MPa", "min": 0.02, "max": 3, "step": 0.01, "default": 0.4, "group": "圧力損失"}
+      ]
+    },
+    {
+      "type": "check", "name": "逆止め弁", "en": "Check valve",
+      "jis": "JIS B 0125 表 13 逆止め弁", "tag": "CV", "model": "check", "symbol": "check",
+      "ports": ["IN", "OUT"],
+      "spec": "クラッキング {crack} MPa",
+      "params": [
+        {"key": "crack", "label": "クラッキング圧力", "unit": "MPa", "min": 0, "max": 1, "step": 0.01, "default": 0.04},
+        {"key": "spring", "label": "ばねを描く", "type": "bool", "default": false, "symbol": true},
+        {"key": "q_rated", "label": "基準流量", "unit": "L/min", "min": 1, "max": 600, "step": 1, "default": 40, "group": "圧力損失"},
+        {"key": "dp_rated", "label": "基準流量での圧力損失", "unit": "MPa", "min": 0.02, "max": 3, "step": 0.01, "default": 0.3, "group": "圧力損失"}
+      ]
+    },
+    {
+      "type": "pilot_check", "name": "パイロット操作逆止め弁", "en": "Pilot operated check valve",
+      "jis": "JIS B 0125 表 13 逆止め弁", "tag": "PCV", "model": "pilot_check", "symbol": "pilot_check",
+      "ports": ["IN", "OUT", "X"],
+      "spec": "クラッキング {crack} MPa / 面積比 {ratio}",
+      "params": [
+        {"key": "crack", "label": "クラッキング圧力", "unit": "MPa", "min": 0, "max": 1, "step": 0.01, "default": 0.2},
+        {"key": "ratio", "label": "パイロット面積比", "unit": "", "min": 1, "max": 20, "step": 0.1, "default": 3.0,
+         "help": "パイロット圧力 × 面積比 が OUT 側の圧力を超えると逆流を許す"},
+        {"key": "q_rated", "label": "基準流量", "unit": "L/min", "min": 1, "max": 600, "step": 1, "default": 40, "group": "圧力損失"},
+        {"key": "dp_rated", "label": "基準流量での圧力損失", "unit": "MPa", "min": 0.02, "max": 3, "step": 0.01, "default": 0.3, "group": "圧力損失"}
+      ]
+    },
+    {
+      "type": "stop_valve", "name": "止め弁", "en": "Stop valve",
+      "jis": "JIS B 0125 表 15 止め弁", "tag": "V", "model": "stop_valve", "symbol": "stop_valve",
+      "ports": ["IN", "OUT"],
+      "params": [
+        {"key": "open", "label": "開いている", "type": "bool", "default": true},
+        {"key": "q_rated", "label": "基準流量", "unit": "L/min", "min": 1, "max": 600, "step": 1, "default": 60, "group": "圧力損失"},
+        {"key": "dp_rated", "label": "基準流量での圧力損失", "unit": "MPa", "min": 0.005, "max": 1, "step": 0.005, "default": 0.05, "group": "圧力損失"}
+      ]
+    }
+  ]
+}

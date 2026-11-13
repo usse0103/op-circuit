@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>油圧回路設計</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23151b26'/%3E%3Ccircle cx='16' cy='16' r='8.5' fill='none' stroke='%23f6a83a' stroke-width='2.2'/%3E%3Cpath d='M16 7.5l-3 5h6z' fill='%23f6a83a'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}?v={{ v }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/print.css') }}?v={{ v }}">
+</head>
+<body>
+<div id="app">
+  <header id="topbar">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+        <circle cx="16" cy="16" r="9" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M16 7l-3.2 5.4h6.4z" fill="currentColor"/>
+        <path d="M16 25v4M16 3v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <div class="brand-text"><b>油圧回路設計</b><span>hydraulics / circuit</span></div>
+    </div>
+
+    <div class="tb-group">
+      <button id="btn-file" class="tb-btn text" title="回路を開く・新しく作る・書き出す">
+        <svg viewBox="0 0 16 16"><path d="M2 4.5V12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1H8L6.5 3.5H3a1 1 0 0 0-1 1z"/></svg>回路
+      </button>
+      <button id="btn-undo" class="tb-btn" title="元に戻す（Ctrl+Z）"><svg viewBox="0 0 16 16"><path d="M6 3.5 2.5 7 6 10.5M2.5 7H10a3.5 3.5 0 0 1 0 7H7"/></svg></button>
+      <button id="btn-redo" class="tb-btn" title="やり直す（Ctrl+Y）"><svg viewBox="0 0 16 16"><path d="M10 3.5 13.5 7 10 10.5M13.5 7H6a3.5 3.5 0 0 0 0 7h3"/></svg></button>
+    </div>
+
+    <div class="tb-group">
+      <button class="tb-btn on" data-tool="select" title="選択・移動・配管"><svg viewBox="0 0 16 16"><path d="M3.5 2.5 12 8l-4 1-1.2 4z"/></svg></button>
+      <button class="tb-btn" data-tool="frame" title="包囲線（一点鎖線）でユニットを囲む"><svg viewBox="0 0 16 16"><rect x="2.5" y="3.5" width="11" height="9" stroke-dasharray="3 1.2 .8 1.2"/></svg></button>
+      <button class="tb-btn" data-tool="text" title="文字を置く"><svg viewBox="0 0 16 16"><path d="M3.5 4V3h9v1M8 3v10M6.5 13h3"/></svg></button>
+      <button id="btn-reroute" class="tb-btn" title="配管の経路を自動で引き直す（選択した配管、なければ全部）"><svg viewBox="0 0 16 16"><path d="M2.5 12.5h4v-9h7M11 1.5l2.5 2-2.5 2"/></svg></button>
+    </div>
+
+    <input id="doc-title" class="doc-title" type="text" spellcheck="false" placeholder="回路の名称" title="回路の名称（表題欄に入る）">
+
+    <div class="tb-group views">
+      <button class="tb-btn text" data-view="values" title="流量・圧力を図面に表示">計算値</button>
+      <button class="tb-btn text" data-view="heat" title="機器ごとの発熱を表示">発熱</button>
+      <button class="tb-btn text" data-view="flow" title="流れの向きを動きで表示">流れ</button>
+      <button class="tb-btn text" data-view="color" title="配管を圧力で色分け（青 = 低い、赤 = 高い）">色分け</button>
+      <button class="tb-btn" data-view="grid" title="格子（2.5 mm）"><svg viewBox="0 0 16 16"><path d="M2.5 5.5h11M2.5 10.5h11M5.5 2.5v11M10.5 2.5v11"/></svg></button>
+      <button class="tb-btn" data-view="dark" title="図面を暗い色で表示（画面だけ。印刷は白地）"><svg viewBox="0 0 16 16"><path d="M13 9.5A5.5 5.5 0 0 1 6.5 3 5.5 5.5 0 1 0 13 9.5z"/></svg></button>
+    </div>
+
+    <div class="tb-group">
+      <button id="btn-zoom-out" class="tb-btn" title="縮小"><svg viewBox="0 0 16 16"><path d="M4 8h8"/></svg></button>
+      <button id="btn-fit" class="tb-btn text zoom" title="用紙全体を表示（0 キー）"><span id="zoom">100 %</span></button>
+      <button id="btn-zoom-in" class="tb-btn" title="拡大"><svg viewBox="0 0 16 16"><path d="M4 8h8M8 4v8"/></svg></button>
+    </div>
+
+    <div class="tb-group right">
+      <span id="save-state" class="saved">保存済み</span>
+      <button id="btn-help" class="tb-btn" title="操作のしかた"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/><path d="M6.3 6.2a1.8 1.8 0 1 1 2.6 1.6c-.6.3-.9.7-.9 1.4M8 11.6v.1"/></svg></button>
+      <button id="btn-report" class="tb-btn text" title="計算書を見る（条件・工程表・熱収支・配管・機器表）">
+        <svg viewBox="0 0 16 16"><path d="M4 1.5h5.5L12.5 4.5v10h-8.5zM9.5 1.5v3h3M6 8h4.5M6 10.5h4.5M6 5.5h1.5"/></svg>計算書
+      </button>
+      <button id="btn-print" class="tb-btn primary text" title="印刷・SVG で保存（Ctrl+P）">
+        <svg viewBox="0 0 16 16"><path d="M4.5 6V2.5h7V6M4.5 11.5h-2V6.5h11v5h-2M4.5 9.5h7v4h-7z"/></svg>印刷
+      </button>
+    </div>
+  </header>
+
+  <aside id="palette"></aside>
+
+  <main id="stage">
+    <svg id="canvas" xmlns="http://www.w3.org/2000/svg"></svg>
+    <div id="hud">
+      <span id="step-chip" class="chip"></span>
+      <span id="step-heat" class="chip soft"></span>
+      <span id="hint" class="chip hint"></span>
+      <span class="hud-space"></span>
+      <span id="calc-state" class="ok">—</span>
+    </div>
+  </main>
+
+  <aside id="inspector"><div id="inspector-body"></div></aside>
+
+  <footer id="dock"></footer>
+</div>
+
+<div id="modal-root"></div>
+<div id="toast"></div>
+<div id="print-root"></div>
+<script type="module" src="{{ url_for('static', filename='js/main.js') }}?v={{ v }}"></script>
+</body>
+</html>
